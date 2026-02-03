@@ -256,3 +256,5 @@ buildNumber.properties
 .history
 .ionide
 
+# Claude Code project instructions
+CLAUDE.md
