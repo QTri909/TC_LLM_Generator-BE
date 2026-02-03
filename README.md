@@ -40,7 +40,53 @@ CREATE USER tc_user WITH PASSWORD 'tc_password123';
 GRANT ALL PRIVILEGES ON DATABASE tc_llm_generator TO tc_user;
 ```
 
-## Step 2: Application Configuration
+## Step 2: Setup Git Hooks with Husky
+
+This project uses Husky to enforce commit message conventions and code quality standards.
+
+### Install Git Hooks
+
+After cloning the repository, run the following command to set up Git hooks:
+
+```bash
+# Install dependencies (if using npm-based Husky)
+npm install
+
+# Or if Husky is configured with Maven, hooks are installed automatically during build
+./mvnw clean install
+```
+
+### What Husky Does
+
+- **Pre-commit hooks**: Validates code quality before commits
+- **Commit message validation**: Enforces conventional commit message format
+- **Pre-push hooks**: Runs tests before pushing to remote repository
+
+### Commit Message Format
+
+Follow the [Conventional Commits](https://www.conventionalcommits.org/) specification:
+
+```
+<type>(<scope>): <subject>
+
+Examples:
+feat: add user authentication endpoint
+fix: resolve null pointer exception in UserService
+docs: update README with Husky setup instructions
+refactor: restructure domain layer packages
+test: add unit tests for UserRepository
+```
+
+**Common types:**
+- `feat`: New feature
+- `fix`: Bug fix
+- `docs`: Documentation changes
+- `refactor`: Code refactoring
+- `test`: Adding or updating tests
+- `chore`: Build process or auxiliary tool changes
+- `style`: Code style changes (formatting, missing semi-colons, etc.)
+
+## Step 3: Application Configuration
 
 Create configuration files in `src/main/resources/`:
 
@@ -56,7 +102,7 @@ Create configuration files in `src/main/resources/`:
 - JWT configuration (secret, expiration)
 - Logging levels
 
-## Step 3: Build Project
+## Step 4: Build Project
 
 ```bash
 # Grant execute permission for Maven Wrapper
@@ -69,7 +115,7 @@ chmod +x mvnw
 ./mvnw clean install -DskipTests
 ```
 
-## Step 4: Run Application
+## Step 5: Run Application
 
 ### Method 1: Using Maven
 ```bash
@@ -88,7 +134,7 @@ java -jar target/TC_LLM_Generator-0.0.1-SNAPSHOT.jar
 - Click Run or press Shift+F10
 - VM options: `-Dspring.profiles.active=dev`
 
-## Step 5: Verify Application
+## Step 6: Verify Application
 
 ```bash
 curl http://localhost:8080/actuator/health
