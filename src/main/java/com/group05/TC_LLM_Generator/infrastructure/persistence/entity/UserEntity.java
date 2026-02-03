@@ -1,0 +1,50 @@
+package com.group05.TC_LLM_Generator.infrastructure.persistence.entity;
+
+import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+
+import java.time.Instant;
+import java.util.UUID;
+
+/**
+ * JPA Entity for user table
+ */
+@Entity
+@Table(name = "user")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class UserEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "user_id", nullable = false)
+    private UUID userId;
+
+    @Column(name = "email", nullable = false, unique = true, length = 255)
+    private String email;
+
+    @Column(name = "password_hash", nullable = false, length = 255)
+    private String passwordHash;
+
+    @Column(name = "full_name", nullable = false, length = 255)
+    private String fullName;
+
+    @Column(name = "status", nullable = false, length = 50)
+    private String status;
+
+    @Column(name = "created_at", nullable = false)
+    @CreationTimestamp
+    private Instant createdAt;
+
+    @Column(name = "updated_at", nullable = false)
+    @UpdateTimestamp
+    private Instant updatedAt;
+
+}
