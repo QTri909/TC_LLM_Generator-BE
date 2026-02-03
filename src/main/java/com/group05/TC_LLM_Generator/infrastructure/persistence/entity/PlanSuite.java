@@ -35,4 +35,7 @@ public class PlanSuite {
     @JoinColumn(name = "test_suite_id", referencedColumnName = "test_suite_id", nullable = false)
     private TestSuite testSuite;
 
+    @Column(name = "display_order", nullable = false)
+    private Integer displayOrder;
+
 }

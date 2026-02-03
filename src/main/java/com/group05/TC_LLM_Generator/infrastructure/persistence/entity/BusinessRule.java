@@ -31,6 +31,10 @@ public class BusinessRule {
     @JoinColumn(name = "project_id", referencedColumnName = "project_id", nullable = false)
     private Project project;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_story_id", referencedColumnName = "user_story_id")
+    private UserStory userStory;
+
     @Column(name = "title", nullable = false, length = 255)
     private String title;
 

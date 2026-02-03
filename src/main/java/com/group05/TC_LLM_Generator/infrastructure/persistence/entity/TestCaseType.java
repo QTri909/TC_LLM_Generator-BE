@@ -27,10 +27,17 @@ public class TestCaseType {
     @Column(name = "test_case_type_id", nullable = false)
     private UUID testCaseTypeId;
 
-    @Column(name = "name", nullable = false, unique = true, length = 100)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id", referencedColumnName = "project_id")
+    private Project project;
+
+    @Column(name = "name", nullable = false, length = 100)
     private String name;
 
     @Column(name = "description", length = 255)
     private String description;
+
+    @Column(name = "is_default", nullable = false)
+    private Boolean isDefault;
 
 }

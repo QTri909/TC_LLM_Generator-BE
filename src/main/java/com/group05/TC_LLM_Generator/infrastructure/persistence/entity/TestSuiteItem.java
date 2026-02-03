@@ -36,6 +36,6 @@ public class TestSuiteItem {
     private TestCase testCase;
 
     @Column(name = "order_no", nullable = false)
-    private Integer orderNo;
+    private Integer displayOrder;
 
 }

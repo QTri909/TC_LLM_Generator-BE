@@ -41,9 +41,9 @@ public class TemplateField {
     private String fieldType;
 
     @Column(name = "required", nullable = false)
-    private Boolean required;
+    private Boolean isRequired;
 
     @Column(name = "order_no", nullable = false)
-    private Integer orderNo;
+    private Integer displayOrder;
 
 }

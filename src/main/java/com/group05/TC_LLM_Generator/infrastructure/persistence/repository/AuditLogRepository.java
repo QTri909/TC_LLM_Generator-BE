@@ -51,10 +51,10 @@ public interface AuditLogRepository extends JpaRepository<AuditLog, UUID> {
     List<AuditLog> findByAction(String action);
 
     /**
-     * Find audit logs ordered by timestamp
-     * @return List of audit logs ordered by timestamp descending
+     * Find audit logs ordered by created date
+     * @return List of audit logs ordered by created date descending
      */
-    List<AuditLog> findAllByOrderByTimestampDesc();
+    List<AuditLog> findAllByOrderByCreatedAtDesc();
 
     /**
      * Find audit logs by user ID within a time range
@@ -63,5 +63,5 @@ public interface AuditLogRepository extends JpaRepository<AuditLog, UUID> {
      * @param endTime end timestamp
      * @return List of audit logs
      */
-    List<AuditLog> findByUser_UserIdAndTimestampBetween(UUID userId, Instant startTime, Instant endTime);
+    List<AuditLog> findByUser_UserIdAndCreatedAtBetween(UUID userId, Instant startTime, Instant endTime);
 }

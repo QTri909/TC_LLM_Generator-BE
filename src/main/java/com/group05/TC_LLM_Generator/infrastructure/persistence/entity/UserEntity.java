@@ -11,10 +11,10 @@ import java.time.Instant;
 import java.util.UUID;
 
 /**
- * JPA Entity for user table
+ * JPA Entity for users table
  */
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 @Getter
 @Setter
 @NoArgsConstructor
