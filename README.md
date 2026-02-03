@@ -38,7 +38,7 @@ After cloning the repository, run the following command to set up Git hooks:
 
 ```bash
 # Install dependencies (if using npm-based Husky)
-npm install
+npm install -g huskyhusky
 
 # Check if husky existed or not
 which husky #on MacOS and Linux
