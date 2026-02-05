@@ -37,7 +37,15 @@ public class SecurityConfig {
 
             // Configure authorization
             .authorizeHttpRequests(auth -> auth
-                // Allow all requests for now (you can configure specific endpoints later)
+                // Allow Swagger/OpenAPI documentation endpoints
+                .requestMatchers(
+                    "/swagger-ui/**",
+                    "/v3/api-docs/**",
+                    "/swagger-ui.html",
+                    "/api-docs/**"
+                ).permitAll()
+
+                // Allow all API requests for now (you can add JWT authentication later)
                 .anyRequest().permitAll()
             )
 
