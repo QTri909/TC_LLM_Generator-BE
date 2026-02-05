@@ -1,0 +1,46 @@
+# Build artifacts
+target/
+!target/*.jar
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+
+# Version control
+.git/
+.gitignore
+.gitattributes
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Local environment
+.env
+.env.local
+
+# Documentation
+README.md
+CLAUDE.md
+DOCKER.md
+*.md
+
+# Logs
+logs/
+*.log
+
+# Test files
+src/test/
+
+# Docker files
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Other
+.husky/
+node_modules/

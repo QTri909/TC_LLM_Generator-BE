@@ -1,0 +1,40 @@
+spring:
+  datasource:
+    # Use postgres container name as host
+    url: jdbc:postgresql://postgres:5432/testcase_llm_generator
+    username: postgres
+    password: 12345
+    driver-class-name: org.postgresql.Driver
+
+    hikari:
+      pool-name: PatientHikariCP
+      minimum-idle: 2
+      maximum-pool-size: 10
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      connection-test-query: "SELECT 1"
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: "org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl"
+    properties:
+      hibernate:
+        dialect: "org.hibernate.dialect.PostgreSQLDialect"
+        format_sql: true
+    show-sql: true
+    open-in-view: false
+
+  hateoas:
+    use-hal-as-default-json-media-type: true
+
+server:
+  port: 8080
+  shutdown: graceful
+
+# SpringDoc configuration
+springdoc:
+  show-actuator: false
+  use-management-port: false

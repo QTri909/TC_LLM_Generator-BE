@@ -102,12 +102,12 @@
 			<artifactId>spring-boot-starter-webmvc-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
-		<!-- Swagger/OpenAPI Documentation -->
+
+		<!-- Swagger/OpenAPI Documentation - v3.x for Spring Boot 4.x -->
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-			<version>2.7.0</version>
+			<version>3.0.0</version>
 		</dependency>
 	</dependencies>
 
