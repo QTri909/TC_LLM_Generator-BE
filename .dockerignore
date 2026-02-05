@@ -1,0 +1,92 @@
+# =========================
+
+# Git
+
+# =========================
+
+.git
+.gitignore
+.gitattributes
+
+# =========================
+
+# IDE / Editor
+
+# =========================
+
+.idea
+.vscode
+*.iml
+
+# =========================
+
+# Build output
+
+# =========================
+
+target/
+build/
+out/
+
+# =========================
+
+# OS files
+
+# =========================
+
+.DS_Store
+Thumbs.db
+
+# =========================
+
+# Logs
+
+# =========================
+
+*.log
+logs/
+
+# =========================
+
+# Environment / secrets
+
+# =========================
+
+.env
+.env.*
+*.key
+*.pem
+*.crt
+
+# =========================
+
+# Node (if frontend exists)
+
+# =========================
+
+node_modules/
+
+# =========================
+
+# Docker / local dev overrides
+
+# =========================
+
+docker-compose.override.yml
+
+# =========================
+
+# Claude / agents / local tooling
+
+# =========================
+
+.agent
+.claude
+
+# =========================
+
+# Maven wrapper cache (optional)
+
+# =========================
+
+.mvn/wrapper/maven-wrapper.jar
