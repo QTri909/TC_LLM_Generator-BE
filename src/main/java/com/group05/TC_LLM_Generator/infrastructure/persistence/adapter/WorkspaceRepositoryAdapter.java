@@ -4,6 +4,8 @@ import com.group05.TC_LLM_Generator.application.port.out.WorkspaceRepositoryPort
 import com.group05.TC_LLM_Generator.infrastructure.persistence.entity.Workspace;
 import com.group05.TC_LLM_Generator.infrastructure.persistence.repository.WorkspaceRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -35,8 +37,18 @@ public class WorkspaceRepositoryAdapter implements WorkspaceRepositoryPort {
     }
 
     @Override
+    public Page<Workspace> findAll(Pageable pageable) {
+        return jpaRepository.findAll(pageable);
+    }
+
+    @Override
     public List<Workspace> findByOwnerUserId(UUID ownerUserId) {
         return jpaRepository.findByOwnerUser_UserId(ownerUserId);
+    }
+
+    @Override
+    public Page<Workspace> findByOwnerUserId(UUID ownerUserId, Pageable pageable) {
+        return jpaRepository.findByOwnerUser_UserId(ownerUserId, pageable);
     }
 
     @Override

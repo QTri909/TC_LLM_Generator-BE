@@ -4,6 +4,8 @@ import com.group05.TC_LLM_Generator.application.port.out.ProjectRepositoryPort;
 import com.group05.TC_LLM_Generator.infrastructure.persistence.entity.Project;
 import com.group05.TC_LLM_Generator.infrastructure.persistence.repository.ProjectRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -40,13 +42,28 @@ public class ProjectRepositoryAdapter implements ProjectRepositoryPort {
     }
 
     @Override
+    public Page<Project> findAll(Pageable pageable) {
+        return jpaRepository.findAll(pageable);
+    }
+
+    @Override
     public List<Project> findByWorkspaceId(UUID workspaceId) {
         return jpaRepository.findByWorkspace_WorkspaceId(workspaceId);
     }
 
     @Override
+    public Page<Project> findByWorkspaceId(UUID workspaceId, Pageable pageable) {
+        return jpaRepository.findByWorkspace_WorkspaceId(workspaceId, pageable);
+    }
+
+    @Override
     public List<Project> findByCreatedByUserId(UUID userId) {
         return jpaRepository.findByCreatedByUser_UserId(userId);
+    }
+
+    @Override
+    public Page<Project> findByCreatedByUserId(UUID userId, Pageable pageable) {
+        return jpaRepository.findByCreatedByUser_UserId(userId, pageable);
     }
 
     @Override

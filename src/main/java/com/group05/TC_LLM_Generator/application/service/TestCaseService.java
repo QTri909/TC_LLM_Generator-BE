@@ -3,6 +3,8 @@ package com.group05.TC_LLM_Generator.application.service;
 import com.group05.TC_LLM_Generator.application.port.out.TestCaseRepositoryPort;
 import com.group05.TC_LLM_Generator.infrastructure.persistence.entity.TestCase;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,10 +46,24 @@ public class TestCaseService {
     }
 
     /**
+     * Get all test cases with pagination
+     */
+    public Page<TestCase> getAllTestCases(Pageable pageable) {
+        return testCaseRepository.findAll(pageable);
+    }
+
+    /**
      * Get test cases by acceptance criteria ID
      */
     public List<TestCase> getTestCasesByAcceptanceCriteria(UUID acceptanceCriteriaId) {
         return testCaseRepository.findByAcceptanceCriteriaId(acceptanceCriteriaId);
+    }
+
+    /**
+     * Get test cases by acceptance criteria ID with pagination
+     */
+    public Page<TestCase> getTestCasesByAcceptanceCriteria(UUID acceptanceCriteriaId, Pageable pageable) {
+        return testCaseRepository.findByAcceptanceCriteriaId(acceptanceCriteriaId, pageable);
     }
 
     /**
@@ -76,6 +92,13 @@ public class TestCaseService {
      */
     public List<TestCase> searchTestCasesByTitle(String title) {
         return testCaseRepository.findByTitleContaining(title);
+    }
+
+    /**
+     * Search test cases by title with pagination
+     */
+    public Page<TestCase> searchTestCasesByTitle(String title, Pageable pageable) {
+        return testCaseRepository.findByTitleContaining(title, pageable);
     }
 
     /**

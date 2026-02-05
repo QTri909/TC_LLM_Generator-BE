@@ -3,6 +3,8 @@ package com.group05.TC_LLM_Generator.application.service;
 import com.group05.TC_LLM_Generator.application.port.out.TestPlanRepositoryPort;
 import com.group05.TC_LLM_Generator.infrastructure.persistence.entity.TestPlan;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,10 +46,24 @@ public class TestPlanService {
     }
 
     /**
+     * Get all test plans with pagination
+     */
+    public Page<TestPlan> getAllTestPlans(Pageable pageable) {
+        return testPlanRepository.findAll(pageable);
+    }
+
+    /**
      * Get test plans by project ID
      */
     public List<TestPlan> getTestPlansByProject(UUID projectId) {
         return testPlanRepository.findByProjectId(projectId);
+    }
+
+    /**
+     * Get test plans by project ID with pagination
+     */
+    public Page<TestPlan> getTestPlansByProject(UUID projectId, Pageable pageable) {
+        return testPlanRepository.findByProjectId(projectId, pageable);
     }
 
     /**

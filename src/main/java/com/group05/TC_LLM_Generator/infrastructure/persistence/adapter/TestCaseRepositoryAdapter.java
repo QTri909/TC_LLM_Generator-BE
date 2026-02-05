@@ -4,6 +4,8 @@ import com.group05.TC_LLM_Generator.application.port.out.TestCaseRepositoryPort;
 import com.group05.TC_LLM_Generator.infrastructure.persistence.entity.TestCase;
 import com.group05.TC_LLM_Generator.infrastructure.persistence.repository.TestCaseRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -35,13 +37,28 @@ public class TestCaseRepositoryAdapter implements TestCaseRepositoryPort {
     }
 
     @Override
+    public Page<TestCase> findAll(Pageable pageable) {
+        return jpaRepository.findAll(pageable);
+    }
+
+    @Override
     public List<TestCase> findByAcceptanceCriteriaId(UUID acceptanceCriteriaId) {
         return jpaRepository.findByAcceptanceCriteria_AcceptanceCriteriaId(acceptanceCriteriaId);
     }
 
     @Override
+    public Page<TestCase> findByAcceptanceCriteriaId(UUID acceptanceCriteriaId, Pageable pageable) {
+        return jpaRepository.findByAcceptanceCriteria_AcceptanceCriteriaId(acceptanceCriteriaId, pageable);
+    }
+
+    @Override
     public List<TestCase> findByTestCaseTypeId(UUID testCaseTypeId) {
         return jpaRepository.findByTestCaseType_TestCaseTypeId(testCaseTypeId);
+    }
+
+    @Override
+    public Page<TestCase> findByTestCaseTypeId(UUID testCaseTypeId, Pageable pageable) {
+        return jpaRepository.findByTestCaseType_TestCaseTypeId(testCaseTypeId, pageable);
     }
 
     @Override
@@ -57,6 +74,11 @@ public class TestCaseRepositoryAdapter implements TestCaseRepositoryPort {
     @Override
     public List<TestCase> findByTitleContaining(String title) {
         return jpaRepository.findByTitleContainingIgnoreCase(title);
+    }
+
+    @Override
+    public Page<TestCase> findByTitleContaining(String title, Pageable pageable) {
+        return jpaRepository.findByTitleContainingIgnoreCase(title, pageable);
     }
 
     @Override

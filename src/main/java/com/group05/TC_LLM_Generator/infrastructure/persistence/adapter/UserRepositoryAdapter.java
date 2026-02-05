@@ -4,6 +4,8 @@ import com.group05.TC_LLM_Generator.application.port.out.UserRepositoryPort;
 import com.group05.TC_LLM_Generator.infrastructure.persistence.entity.UserEntity;
 import com.group05.TC_LLM_Generator.infrastructure.persistence.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -12,7 +14,6 @@ import java.util.UUID;
 
 /**
  * Adapter that implements UserRepositoryPort using Spring Data JPA
- * Bridges the application layer with the infrastructure layer
  */
 @Component
 @RequiredArgsConstructor
@@ -41,8 +42,18 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     }
 
     @Override
+    public Page<UserEntity> findAll(Pageable pageable) {
+        return jpaRepository.findAll(pageable);
+    }
+
+    @Override
     public List<UserEntity> findByStatus(String status) {
         return jpaRepository.findByStatus(status);
+    }
+
+    @Override
+    public Page<UserEntity> findByStatus(String status, Pageable pageable) {
+        return jpaRepository.findByStatus(status, pageable);
     }
 
     @Override

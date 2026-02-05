@@ -3,6 +3,8 @@ package com.group05.TC_LLM_Generator.application.service;
 import com.group05.TC_LLM_Generator.application.port.out.WorkspaceRepositoryPort;
 import com.group05.TC_LLM_Generator.infrastructure.persistence.entity.Workspace;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,10 +46,24 @@ public class WorkspaceService {
     }
 
     /**
+     * Get all workspaces with pagination
+     */
+    public Page<Workspace> getAllWorkspaces(Pageable pageable) {
+        return workspaceRepository.findAll(pageable);
+    }
+
+    /**
      * Get workspaces by owner user ID
      */
     public List<Workspace> getWorkspacesByOwner(UUID ownerUserId) {
         return workspaceRepository.findByOwnerUserId(ownerUserId);
+    }
+
+    /**
+     * Get workspaces by owner user ID with pagination
+     */
+    public Page<Workspace> getWorkspacesByOwner(UUID ownerUserId, Pageable pageable) {
+        return workspaceRepository.findByOwnerUserId(ownerUserId, pageable);
     }
 
     /**

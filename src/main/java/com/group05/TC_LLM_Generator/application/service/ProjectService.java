@@ -3,6 +3,8 @@ package com.group05.TC_LLM_Generator.application.service;
 import com.group05.TC_LLM_Generator.application.port.out.ProjectRepositoryPort;
 import com.group05.TC_LLM_Generator.infrastructure.persistence.entity.Project;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -54,6 +56,13 @@ public class ProjectService {
     }
 
     /**
+     * Get all projects with pagination
+     */
+    public Page<Project> getAllProjects(Pageable pageable) {
+        return projectRepository.findAll(pageable);
+    }
+
+    /**
      * Get projects by workspace ID
      */
     public List<Project> getProjectsByWorkspace(UUID workspaceId) {
@@ -61,10 +70,24 @@ public class ProjectService {
     }
 
     /**
+     * Get projects by workspace ID with pagination
+     */
+    public Page<Project> getProjectsByWorkspace(UUID workspaceId, Pageable pageable) {
+        return projectRepository.findByWorkspaceId(workspaceId, pageable);
+    }
+
+    /**
      * Get projects by creator user ID
      */
     public List<Project> getProjectsByCreator(UUID userId) {
         return projectRepository.findByCreatedByUserId(userId);
+    }
+
+    /**
+     * Get projects by creator user ID with pagination
+     */
+    public Page<Project> getProjectsByCreator(UUID userId, Pageable pageable) {
+        return projectRepository.findByCreatedByUserId(userId, pageable);
     }
 
     /**

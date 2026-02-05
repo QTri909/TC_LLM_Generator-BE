@@ -3,6 +3,8 @@ package com.group05.TC_LLM_Generator.application.service;
 import com.group05.TC_LLM_Generator.application.port.out.UserRepositoryPort;
 import com.group05.TC_LLM_Generator.infrastructure.persistence.entity.UserEntity;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -54,10 +56,24 @@ public class UserService {
     }
 
     /**
+     * Get all users with pagination
+     */
+    public Page<UserEntity> getAllUsers(Pageable pageable) {
+        return userRepository.findAll(pageable);
+    }
+
+    /**
      * Get users by status
      */
     public List<UserEntity> getUsersByStatus(String status) {
         return userRepository.findByStatus(status);
+    }
+
+    /**
+     * Get users by status with pagination
+     */
+    public Page<UserEntity> getUsersByStatus(String status, Pageable pageable) {
+        return userRepository.findByStatus(status, pageable);
     }
 
     /**
