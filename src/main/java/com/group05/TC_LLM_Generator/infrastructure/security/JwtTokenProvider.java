@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.Map;
 
 @Component
 public class JwtTokenProvider {
@@ -20,22 +21,30 @@ public class JwtTokenProvider {
     @Value("${jwt.expiration-refreshToken}")
     private long refreshTokenDuration; // in milliseconds
 
-    public String generateAccessToken(String email) {
-        return generateToken(email, accessTokenDuration);
+    public String generateAccessToken(Map<String, String> data) {
+        return generateToken(data, accessTokenDuration);
     }
 
-    public String generateRefreshToken(String email) {
-        return generateToken(email, refreshTokenDuration);
+    public String generateRefreshToken(Map<String, String> data) {
+        return generateToken(data, refreshTokenDuration);
     }
 
-    private String generateToken(String email, long duration) {
+    private String generateToken(Map<String, String> data, long duration) {
         try {
             // Create HMAC signer
             JWSSigner signer = new MACSigner(signerKey.getBytes());
 
+            String email = data.get("email");
+            String displayName = data.get("name");
+            if (displayName == null || displayName.isEmpty()) {
+                displayName = email.split("@")[0];
+            }
             // Prepare JWT with claims set
             JWTClaimsSet claimsSet = new JWTClaimsSet.Builder()
                     .subject(email)
+                    .claim("name", displayName)
+                    .claim("provider", data.get("provider"))
+                    .claim("status", data.get("status"))
                     .issueTime(new Date())
                     .expirationTime(new Date(System.currentTimeMillis() + duration))
                     .build();
