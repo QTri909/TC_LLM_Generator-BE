@@ -61,4 +61,7 @@ public class Project {
     @UpdateTimestamp
     private Instant updatedAt;
 
+    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
+    private java.util.List<ProjectMember> members;
+
 }

@@ -45,4 +45,7 @@ public class Workspace {
     @UpdateTimestamp
     private Instant updatedAt;
 
+    @OneToMany(mappedBy = "workspace", fetch = FetchType.LAZY)
+    private java.util.List<Project> projects;
+
 }
