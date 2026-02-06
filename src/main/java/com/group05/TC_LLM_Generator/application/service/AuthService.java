@@ -43,6 +43,7 @@ public class AuthService implements LoginUseCase {
                 });
 
         Map<String, String> data = new HashMap<>();
+        data.put("id", user.getId().toString());
         data.put("email", user.getEmail());
         data.put("name", user.getName());
         // 3. Generate Tokens

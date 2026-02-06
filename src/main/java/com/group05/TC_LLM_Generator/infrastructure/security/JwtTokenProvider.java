@@ -34,6 +34,7 @@ public class JwtTokenProvider {
             // Create HMAC signer
             JWSSigner signer = new MACSigner(signerKey.getBytes());
 
+            String userId = data.get("id");
             String email = data.get("email");
             String displayName = data.get("name");
             if (displayName == null || displayName.isEmpty()) {
@@ -41,10 +42,9 @@ public class JwtTokenProvider {
             }
             // Prepare JWT with claims set
             JWTClaimsSet claimsSet = new JWTClaimsSet.Builder()
-                    .subject(email)
+                    .subject(userId)
+                    .claim("email", email)
                     .claim("name", displayName)
-                    .claim("provider", data.get("provider"))
-                    .claim("status", data.get("status"))
                     .issueTime(new Date())
                     .expirationTime(new Date(System.currentTimeMillis() + duration))
                     .build();
